@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         login_button = (Button)findViewById(R.id.buttonlogin);
 
         // Initialize Firebase Auth
-        mFirebaseAuth = FirebaseAuth.getInstance();
+       mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
 
@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.buttonlogin:
+
                 String user_f = user.getText().toString();
                 String password_f = password.getText().toString();
 
@@ -104,7 +105,10 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult>task) {
                                     if (task.isSuccessful()) {
+
                                         Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+
+
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         Toast.makeText(LoginActivity.this, "Login Successful !",
@@ -119,11 +123,14 @@ public class LoginActivity extends AppCompatActivity {
                                         dialog.show();
                                     }
                                 }
+
                             });
+
                 }
                 break;
             default:
                 //pass
+
                 break;
         }
     }

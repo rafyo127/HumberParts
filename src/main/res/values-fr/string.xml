@@ -37,5 +37,23 @@
     <string name="admintratorstring">Administrateur</string>
     <string name="title_activity_login">LoginActivity</string>
 
+    <string name="title_activity_add">Ajouter</string>
+    <string name="title_activity_delete">Effacer</string>
+    <string name="button_view">Vue Base de données</string>
+
+    <string name="tv_id">ID#</string>
+    <string name="tv_student_num">Élève #</string>
+    <string name="tv_date">Date</string>
+    <string name="tv_part_num">Partie #</string>
+    <string name="tv_part_name">Nom de la pièce</string>
+    <string name="tv_num_instock">Pièces en Stock</string>
+    <string name="tv_id_in">#</string>
+    <string name="search_id">Rechercher un numéro d étudiant</string>
+    <string name="button_find">Chercher</string>
+    <string name="name">Nom de l administrateur</string>
+    <string name="email">Adresse e-mail</string>
+
+    <string name="action_logout">Se déconnecter</string>
+
 
 </resources>

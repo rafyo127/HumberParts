@@ -44,8 +44,8 @@ public class AdminActivity extends AppCompatActivity {
         spinner.setVisibility(View.GONE);
 
         // Initialize Firebase Auth
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+       mFirebaseAuth = FirebaseAuth.getInstance();
+       mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
     }
     static void clearSpinner(){

@@ -79,8 +79,8 @@ public class AddActivity extends AppCompatActivity {
         all_parts = buffer2.toString();
 
         // Initialize Firebase Auth
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+//        mFirebaseAuth = FirebaseAuth.getInstance();
+//        mFirebaseUser = mFirebaseAuth.getCurrentUser();
     }
     void clearSpinner(){
         spinner.setVisibility(View.GONE);

@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/mainscreen1">
 
-
     <EditText
         android:id="@+id/et_search"
         android:hint="@string/search_id"

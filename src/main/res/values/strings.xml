@@ -53,6 +53,7 @@
     <string name="name">Administrator Name</string>
     <string name="email">Email Address</string>
 
+
     <string name="action_logout">Logout</string>
 
 </resources>

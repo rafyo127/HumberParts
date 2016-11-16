@@ -59,8 +59,8 @@ public class DatabaseViewer extends AppCompatActivity {
         setContentView(R.layout.activity_database_view);
 
         // Initialize Firebase Auth
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+       mFirebaseAuth = FirebaseAuth.getInstance();
+       mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         db = new DatabaseActivity(getBaseContext());
 
