@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">HumberParts</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_data_base">DataBase</string>
+    <string name="large_text"></string>
+    <string name="welcone">Welcome to Humber Parts</string>
+    <string name="inventorystring">Inventory</string>
+    <string name="loginadminstring">Login Adminstrator</string>
+    <string name="loginstring">Login</string>
+
+    <string name="ourteamstring">Our Team:</string>
+
+    <string name="aboutstring">About</string>
+    <string name="versionstring">Version #</string>
+
+    <string name="usernamestring">Username</string>
+    <string name="passwordstring">Password</string>
+
+    <string name="addstring">Add</string>
+    <string name="deletestring">Delete</string>
+    <string name="Database">Database View</string>
+
+    <string name="studentstring">Student Number</string>
+    <string name="partstring">Part</string>
+
+    <string name="title_activity_inventory">Inventory</string>
+    <string name="title_activity_setting">Setting</string>
+    <string name="about">About us</string>
+    <string name="description_about">
+        Our group, The Walking Programmers will be integrating the knowledge and skills we have learned from our program into this Internet of Things themed capstone project.
+        This proposal requests the approval to build the hardware portion that will connect to a database as well as to a mobile device application.
+        We will be collaborating with the following company/department Humber College Information Technology. </string>
+    <string name="member1">Masoud Raghuzar (Project Manager)</string>
+    <string name="member2">Rafil Yashooa</string>
+    <string name="member3">Divesh Oree</string>
+    <string name="search">Search</string>
+    <string name="admintratorstring">Adminstrator</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_admin">AdminActivity</string>
+    <string name="title_activity_add">Add</string>
+    <string name="title_activity_delete">Delete</string>
+    <string name="button_view">View Database</string>
+
+    <string name="tv_id">ID#</string>
+    <string name="tv_student_num">Student #</string>
+    <string name="tv_date">Date</string>
+    <string name="tv_part_num">Part #</string>
+    <string name="tv_part_name">Part Name</string>
+    <string name="tv_num_instock">Parts in Stock</string>
+    <string name="tv_id_in">#</string>
+    <string name="search_id">Search Student Number</string>
+    <string name="button_find">Search</string>
+    <string name="name">Administrator Name</string>
+    <string name="email">Email Address</string>
+
+    <string name="action_logout">Logout</string>
+
+</resources>

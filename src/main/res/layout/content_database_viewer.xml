@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/inventory"
+    android:id="@+id/custom_layout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:id="@+id/custom_layout2">
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/tv_id" />
+
+        <TextView
+            android:id="@+id/tv_student_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_id"
+            android:layout_below="@+id/tv_id"
+            android:text="@string/tv_student_num" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_id"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv_student_num"
+            android:text="@string/tv_date" />
+
+        <TextView
+            android:id="@+id/tv_part_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_id"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv_student_num"
+            android:text="@string/tv_part_num" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview_database"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ProgressBar
+        android:id="@+id/progressBar_view"
+        style="@android:style/Widget.Holo.ProgressBar.Large"
+        android:progressDrawable="@android:color/holo_blue_dark"
+        android:layout_width="405dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

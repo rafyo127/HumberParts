@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">HumberParts</string>
+    <string name="action_settings">parametres</string>
+    <string name="title_activity_data_base">Base de données</string>
+    <string name="welcone">Bienvenue à Humber les pièces</string>
+    <string name="inventorystring">Inventaire</string>
+    <string name="loginadminstring">Administrateur de connexion</string>
+    <string name="loginstring">S identifier</string>
+
+    <string name="ourteamstring">Notre équipe:</string>
+
+    <string name="aboutstring">Sur</string>
+    <string name="versionstring">Version #</string>
+
+    <string name="usernamestring">Nom d utilisateur</string>
+    <string name="passwordstring">Mot de passe</string>
+
+    <string name="addstring">Ajouter</string>
+    <string name="deletestring">Effacer</string>
+
+    <string name="studentstring">Élève Nombre</string>
+    <string name="partstring">Partie</string>
+
+    <string name="title_activity_inventory">Inventaire</string>
+    <string name="title_activity_setting">Réglage</string>
+    <string name="about">À propos de nous</string>
+    <string name="description_about">
+        Notre groupe, The Walking Programmers integrera les connaissances et les habiletes que nous avons acquises grace a notre programme dans ce projet sur le theme de l Internet des Choses.
+        Cette proposition demande l approbation pour construire la partie materiel qui se connectera a une base de donnees ainsi qu a une application de peripherique mobile.
+        Nous collaborerons avec la societe  departement suivant Humber College Information Technology.</string>
+    <string name="member1">Masoud Raghuzar (Chef de projet)</string>
+    <string name="member2">Rafil Yashooa</string>
+    <string name="member3">Divesh Oree</string>
+    <string name="search">Chercher</string>
+    <string name="admintratorstring">Administrateur</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+
+</resources>

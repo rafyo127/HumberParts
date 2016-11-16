@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "552105114031",
+    "firebase_url": "https://humberparts.firebaseio.com",
+    "project_id": "humberparts",
+    "storage_bucket": "humberparts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552105114031:android:ef36e6818467e303",
+        "android_client_info": {
+          "package_name": "humberparts.walkingprogrammers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "552105114031-kn6ck2vdpo4r32piusr5jip055m10ooa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "humberparts.walkingprogrammers",
+            "certificate_hash": "D1CBB9E7E27EF509FBAB51EC61F7D454AD61C490"
+          }
+        },
+        {
+          "client_id": "552105114031-o0a3dqd4dt7vhg7dh65vru4t298mldbj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk27oaXkCafwC76PrvRe2zKdvmb3lzGxM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "552105114031-o0a3dqd4dt7vhg7dh65vru4t298mldbj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
