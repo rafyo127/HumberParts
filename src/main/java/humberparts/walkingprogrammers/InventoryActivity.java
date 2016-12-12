@@ -205,39 +205,39 @@ public class InventoryActivity extends AppCompatActivity {
 
         reference= FirebaseDatabase.getInstance().getReference().child("inventory").child("parts");
         reference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        part1_name = dataSnapshot.child("part1").child("name").getValue().toString();
-                        part1_stock = dataSnapshot.child("part1").child("in stock").getValue().toString();
-                        part1_id=dataSnapshot.child("part1").child("id").getValue().toString();
+                part1_name = dataSnapshot.child("part1").child("name").getValue().toString();
+                part1_stock = dataSnapshot.child("part1").child("in stock").getValue().toString();
+                part1_id=dataSnapshot.child("part1").child("id").getValue().toString();
 
-                        part2_name = dataSnapshot.child("part2").child("name").getValue().toString();
-                        part2_stock = dataSnapshot.child("part2").child("in stock").getValue().toString();
-                        part2_id=dataSnapshot.child("part2").child("id").getValue().toString();
+                part2_name = dataSnapshot.child("part2").child("name").getValue().toString();
+                part2_stock = dataSnapshot.child("part2").child("in stock").getValue().toString();
+                part2_id=dataSnapshot.child("part2").child("id").getValue().toString();
 
-                        part3_name = dataSnapshot.child("part3").child("name").getValue().toString();
-                        part3_stock = dataSnapshot.child("part3").child("in stock").getValue().toString();
-                        part3_id=dataSnapshot.child("part3").child("id").getValue().toString();
+                part3_name = dataSnapshot.child("part3").child("name").getValue().toString();
+                part3_stock = dataSnapshot.child("part3").child("in stock").getValue().toString();
+                part3_id=dataSnapshot.child("part3").child("id").getValue().toString();
 
-                        part4_name = dataSnapshot.child("part4").child("name").getValue().toString();
-                        part4_stock = dataSnapshot.child("part4").child("in stock").getValue().toString();
-                        part4_id=dataSnapshot.child("part4").child("id").getValue().toString();
+                part4_name = dataSnapshot.child("part4").child("name").getValue().toString();
+                part4_stock = dataSnapshot.child("part4").child("in stock").getValue().toString();
+                part4_id=dataSnapshot.child("part4").child("id").getValue().toString();
 
-                        part5_name = dataSnapshot.child("part5").child("name").getValue().toString();
-                        part5_stock = dataSnapshot.child("part5").child("in stock").getValue().toString();
-                        part5_id=dataSnapshot.child("part5").child("id").getValue().toString();
+                part5_name = dataSnapshot.child("part5").child("name").getValue().toString();
+                part5_stock = dataSnapshot.child("part5").child("in stock").getValue().toString();
+                part5_id=dataSnapshot.child("part5").child("id").getValue().toString();
 
-                        part6_name = dataSnapshot.child("part6").child("name").getValue().toString();
-                        part6_stock = dataSnapshot.child("part6").child("in stock").getValue().toString();
-                        part6_id=dataSnapshot.child("part6").child("id").getValue().toString();
+                part6_name = dataSnapshot.child("part6").child("name").getValue().toString();
+                part6_stock = dataSnapshot.child("part6").child("in stock").getValue().toString();
+                part6_id=dataSnapshot.child("part6").child("id").getValue().toString();
 
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w("ERR", "getUser:onCancelled", databaseError.toException());
-                    }
-                });
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("ERR", "getUser:onCancelled", databaseError.toException());
+            }
+        });
 
         ModelInventory inventory = new ModelInventory();
         inventory.setId(part1_id);

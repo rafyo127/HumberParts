@@ -16,6 +16,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,8 +27,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Time;
 import java.util.Calendar;
@@ -43,8 +47,6 @@ public class AddActivity extends AppCompatActivity {
     EditText student_id, part1;
     String date,all_parts;
     private DatabaseReference mDatabase;
-
-    int countID=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,24 @@ public class AddActivity extends AppCompatActivity {
                             mDatabase.child("users").child(student_id.getText().toString()).child("Date").setValue(res.getString(2));
                             mDatabase.child("users").child(student_id.getText().toString()).child("Part_number").setValue(res.getString(3));
                         }
+
+                        mDatabase.child("inventory").child("parts").child(part1.getText().toString());
+                        mDatabase.keepSynced(true);
+                        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Log.d("DATA",dataSnapshot.getChildren().toString());
+                                int id = (Integer)dataSnapshot.child("in stock").getValue();
+                                id--;
+                                mDatabase.child("inventory").child("parts").child(part1.getText().toString()).child("in stock").setValue(id);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
                         startActivity(new Intent(this,AdminActivity.class));
                     } else {
                         Toast.makeText(this, "Error in adding ", Toast.LENGTH_LONG).show();

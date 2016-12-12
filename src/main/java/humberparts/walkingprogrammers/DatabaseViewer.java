@@ -68,8 +68,8 @@ public class DatabaseViewer extends AppCompatActivity {
         setContentView(R.layout.activity_database_view);
 
         // Initialize Firebase Auth
-       mFirebaseAuth = FirebaseAuth.getInstance();
-       mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         db = new DatabaseActivity(getBaseContext());
 
@@ -118,15 +118,52 @@ public class DatabaseViewer extends AppCompatActivity {
 
     private void filterStudents(String studentId, StudentAdapter adapter_listview, DatabaseActivity db, final List<ModelStudent> students) {
         students.clear();
-        Cursor res = db.search(et_search.getText().toString());
-        while (res.moveToNext()){
+
+        Cursor res = db.search(studentId);
+        while(res.moveToNext()){
+
             ModelStudent student = new ModelStudent();
 
             student.setId(res.getString(0));
             student.setNumber(res.getString(1));
             student.setDate(res.getString(2));
             student.setPartNumber(res.getString(3));
+
+            students.add(student);
         }
+//        reference= FirebaseDatabase.getInstance().getReference().child("users").child(et_search.getText().toString());
+//        reference.addListenerForSingleValueEvent(
+//                new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        try{
+//                            Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+//
+//                            String student_num = map.get("Student_number").toString();
+//                            String date = map.get("Date").toString();
+//                            String Part_num = map.get("Part_number").toString();
+//                            String id = map.get("id").toString();
+//
+//                            Log.d("getUser:DATA", student_num);
+//                            Log.d("getUser:DATA", date);
+//                            Log.d("getUser:DATA", Part_num);
+//
+//                            ModelStudent student = new ModelStudent();
+//                            student.setId(id);
+//                            student.setNumber(student_num);
+//                            student.setDate(date);
+//                            student.setPartNumber(Part_num);
+//                            students.add(student);
+//                        }catch (NullPointerException e){
+//                            //nothing found
+//                        }
+//                    }
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        Log.w("ERR", "getUser:onCancelled", databaseError.toException());
+//                    }
+//                });
+
         adapter_listview.setItems(students);
         adapter_listview.notifyDataSetChanged();
     }
