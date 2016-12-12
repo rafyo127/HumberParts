@@ -7,6 +7,7 @@
 package humberparts.walkingprogrammers;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
@@ -25,6 +26,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Time;
 import java.util.Calendar;
@@ -37,10 +40,12 @@ public class AddActivity extends AppCompatActivity {
 
     static private ProgressBar spinner;
     DatabaseActivity db;
-    EditText student_id, part1, part2, part3, part4, part5;
-    String student, part_1, part_2, part_3, part_4, part_5;
+    EditText student_id, part1;
     String date,all_parts;
-    StringBuilder buffer2;
+    private DatabaseReference mDatabase;
+
+    int countID=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,34 +58,15 @@ public class AddActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         spinner = (ProgressBar)findViewById(R.id.progressBar3);
         spinner.setVisibility(View.GONE);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         student_id = (EditText)findViewById(R.id.edittextstudentnumber);
         part1 = (EditText)findViewById(R.id.Part);
-        part2 = (EditText)findViewById(R.id.Part2);
-        part3 = (EditText)findViewById(R.id.Part3);
-        part4 = (EditText)findViewById(R.id.Part4);
-        part5 = (EditText)findViewById(R.id.Part5);
         date = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
-        student = student_id.getText().toString();
-        part_1 = part1.getText().toString();
-        part_2 = part2.getText().toString();
-        part_3 = part3.getText().toString();
-        part_4 = part4.getText().toString();
-        part_5 = part5.getText().toString();
-
-        buffer2 = new StringBuilder();
-        buffer2.append(part1);
-        buffer2.append(part2);
-        buffer2.append(part3);
-        buffer2.append(part4);
-        buffer2.append(part5);
-
-        all_parts = buffer2.toString();
-
         // Initialize Firebase Auth
-//        mFirebaseAuth = FirebaseAuth.getInstance();
-//        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
     }
     void clearSpinner(){
         spinner.setVisibility(View.GONE);
@@ -91,13 +77,21 @@ public class AddActivity extends AppCompatActivity {
             case R.id.buttonadd1:
                 if(student_id.length() == 0){
                     Toast.makeText(this, "Student field can't be empty", Toast.LENGTH_LONG).show();
-                }else if(all_parts.length() ==0){
+                }else if(part1.length() ==0){
                     Toast.makeText(this, "You must enter atleast one part", Toast.LENGTH_LONG).show();
                 }else{
-                    Boolean isAdded = db.insertData(student_id.getText().toString(),date,all_parts);
+                    Boolean isAdded = db.insertData(student_id.getText().toString(),date,part1.getText().toString());
                     if (isAdded) {
                         spinner.setVisibility(View.VISIBLE);
                         Toast.makeText(this, "Part Added", Toast.LENGTH_SHORT).show();
+                        //add data to firebase
+                        Cursor res = db.databaseViewer();
+                        while(res.moveToNext()){
+                            mDatabase.child("users").child(student_id.getText().toString()).child("id").setValue(res.getString(0));
+                            mDatabase.child("users").child(student_id.getText().toString()).child("Student_number").setValue(res.getString(1));
+                            mDatabase.child("users").child(student_id.getText().toString()).child("Date").setValue(res.getString(2));
+                            mDatabase.child("users").child(student_id.getText().toString()).child("Part_number").setValue(res.getString(3));
+                        }
                         startActivity(new Intent(this,AdminActivity.class));
                     } else {
                         Toast.makeText(this, "Error in adding ", Toast.LENGTH_LONG).show();
@@ -114,6 +108,8 @@ public class AddActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         MenuItem register = menu.findItem(R.id.action_logout);
+        MenuItem search = menu.findItem(R.id.action_search);
+        search.setVisible(false);
         if(mFirebaseUser == null){
             register.setVisible(false);
         }else{

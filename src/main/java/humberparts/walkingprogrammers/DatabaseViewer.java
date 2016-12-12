@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,11 +31,18 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by RAF on 2016-11-12.
@@ -44,6 +52,7 @@ public class DatabaseViewer extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    private DatabaseReference reference;
 
     static private ProgressBar spinner;
     DatabaseActivity db;
@@ -64,14 +73,13 @@ public class DatabaseViewer extends AppCompatActivity {
 
         db = new DatabaseActivity(getBaseContext());
 
-        Cursor res = db.databaseViewer();
-
         et_search = (EditText) findViewById(R.id.et_search);
         but_search = (Button) findViewById(R.id.but_find);
 
         final List<ModelStudent> mStudents = new LinkedList<>();
 
-        while (res.moveToNext()) {
+        Cursor res = db.databaseViewer();
+        while (res.moveToNext()){
             ModelStudent student = new ModelStudent();
 
             student.setId(res.getString(0));
@@ -86,7 +94,7 @@ public class DatabaseViewer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(et_search.length() == 0){
-                    Toast.makeText(DatabaseViewer.this, "Enter a string to search", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DatabaseViewer.this, "Enter a student number to start searching", Toast.LENGTH_LONG).show();
 
                 }else{
                     filterStudents(et_search.getText().toString(), adapter_listview, db, mStudents);
@@ -106,32 +114,43 @@ public class DatabaseViewer extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-//
-//        spinner = (ProgressBar)findViewById(R.id.progressBar_view);
-//        spinner.setVisibility(View.GONE);
-//
-//        list = (ListView)findViewById(R.id.listview_database);
-//        id_num=(TextView)findViewById(R.id.tv_id);
-//        student_num=(TextView)findViewById(R.id.tv_student_num);
-//        date =(TextView)findViewById(R.id.tv_date);
-//        part_num=(TextView)findViewById(R.id.tv_part_num);
     }
 
-    private void filterStudents(String studentId, StudentAdapter adapter_listview, DatabaseActivity db, List<ModelStudent> students) {
+    private void filterStudents(String studentId, StudentAdapter adapter_listview, DatabaseActivity db, final List<ModelStudent> students) {
         students.clear();
 
-        Cursor filters = db.search(studentId);
+        reference= FirebaseDatabase.getInstance().getReference().child("users").child(et_search.getText().toString());
+        reference.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        try{
+                            Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
 
-        while (filters.moveToNext()) {
-            ModelStudent student = new ModelStudent();
+                            String student_num = map.get("Student_number").toString();
+                            String date = map.get("Date").toString();
+                            String Part_num = map.get("Part_number").toString();
+                            String id = map.get("id").toString();
 
-            student.setId(filters.getString(0));
-            student.setNumber(filters.getString(1));
-            student.setDate(filters.getString(2));
-            student.setPartNumber(filters.getString(3));
+                            Log.d("getUser:DATA", student_num);
+                            Log.d("getUser:DATA", date);
+                            Log.d("getUser:DATA", Part_num);
 
-            students.add(student);
-        }
+                            ModelStudent student = new ModelStudent();
+                            student.setId(id);
+                            student.setNumber(student_num);
+                            student.setDate(date);
+                            student.setPartNumber(Part_num);
+                            students.add(student);
+                        }catch (NullPointerException e){
+                            //nothing found
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w("ERR", "getUser:onCancelled", databaseError.toException());
+                    }
+                });
 
         adapter_listview.setItems(students);
         adapter_listview.notifyDataSetChanged();
@@ -156,7 +175,8 @@ public class DatabaseViewer extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         MenuItem register = menu.findItem(R.id.action_logout);
-
+        MenuItem search = menu.findItem(R.id.action_search);
+        search.setVisible(false);
         if(mFirebaseUser == null){
             register.setVisible(false);
         }else{

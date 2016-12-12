@@ -22,11 +22,14 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class DeleteActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    private DatabaseReference mDatabase;
 
     static private ProgressBar spinner;
     EditText student_id;
@@ -41,6 +44,7 @@ public class DeleteActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -58,12 +62,14 @@ public class DeleteActivity extends AppCompatActivity {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.buttondelete1:
-                Integer deletedRows = db.deleteData(student_id.getText().toString());
-                if(deletedRows > 0) {
+                Integer deleteRow = db.deleteData(student_id.getText().toString());
+                if(deleteRow > 0){
+                    //delete from firebase
+                    mDatabase.child("users").child(student_id.getText().toString()).removeValue();
                     Toast.makeText(DeleteActivity.this, "Student Deleted", Toast.LENGTH_SHORT).show();
                     spinner.setVisibility(View.VISIBLE);
                     startActivity(new Intent(this,AdminActivity.class));
-                }else {
+                }else{
                     Toast.makeText(DeleteActivity.this, "Error in deleting", Toast.LENGTH_LONG).show();
                 }
                 break;
@@ -74,6 +80,8 @@ public class DeleteActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu)
     {
+        MenuItem search = menu.findItem(R.id.action_search);
+        search.setVisible(false);
         MenuItem register = menu.findItem(R.id.action_logout);
         if(mFirebaseUser == null){
             register.setVisible(false);

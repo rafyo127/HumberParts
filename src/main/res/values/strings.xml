@@ -16,9 +16,9 @@
     <string name="usernamestring">Username</string>
     <string name="passwordstring">Password</string>
 
-    <string name="addstring">Add</string>
-    <string name="deletestring">Delete</string>
-    <string name="Database">Database View</string>
+    <string name="addstring">Checkout Item</string>
+    <string name="deletestring">Return Item</string>
+    <string name="Database">View Database</string>
 
     <string name="studentstring">Student Number</string>
     <string name="partstring">Part</string>

@@ -75,6 +75,8 @@ public class aboutActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu)
     {
+        MenuItem search = menu.findItem(R.id.action_search);
+        search.setVisible(false);
         MenuItem register = menu.findItem(R.id.action_logout);
         if(mFirebaseUser == null){
             register.setVisible(false);

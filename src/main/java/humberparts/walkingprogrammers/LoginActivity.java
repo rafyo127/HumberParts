@@ -67,14 +67,9 @@ public class LoginActivity extends AppCompatActivity {
         login_button = (Button)findViewById(R.id.buttonlogin);
 
         // Initialize Firebase Auth
-       mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
-
-//        if (mFirebaseUser != null) {
-//            // Not logged in, launch the Log In activity
-//            loadLogInView();
-//        }
     }
 
     static void clearSpinner(){
@@ -108,12 +103,20 @@ public class LoginActivity extends AppCompatActivity {
 
                                         Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
 
-
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         Toast.makeText(LoginActivity.this, "Login Successful !",
-                                                Toast.LENGTH_LONG).show();
-                                        startActivity(intent);
+                                                Toast.LENGTH_SHORT).show();
+                                        try{
+                                            String userEmail = mFirebaseUser.getEmail();
+                                            Toast.makeText(LoginActivity.this, "Welcome, "+userEmail+" !",
+                                                    Toast.LENGTH_LONG).show();
+                                            startActivity(intent);
+                                        }catch(NullPointerException e){
+                                            Toast.makeText(LoginActivity.this, "Connection Error, try again in a few seconds",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+
                                     } else {
                                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                         builder.setMessage(task.getException().getMessage())
@@ -138,6 +141,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem register = menu.findItem(R.id.action_logout);
+        MenuItem search = menu.findItem(R.id.action_search);
+        search.setVisible(false);
         if(mFirebaseUser == null) {
             register.setVisible(false);
         }else{

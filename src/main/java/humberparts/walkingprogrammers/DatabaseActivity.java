@@ -21,7 +21,7 @@ import java.sql.PreparedStatement;
  */
 
 public class DatabaseActivity extends SQLiteOpenHelper{
-    public static final String DATABASE_NAME = "humber_parts.db";
+    public static final String DATABASE_NAME = "humber_parts_updated.db";
     public static final String TABLE_NAME = "student_holds";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "student_id";

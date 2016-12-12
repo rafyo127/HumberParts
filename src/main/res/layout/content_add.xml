@@ -59,43 +59,21 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
-    <EditText
-        android:id="@+id/Part2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/partstring"
-        android:background="@color/transparent"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-    <EditText
-        android:id="@+id/Part3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/partstring"
-        android:background="@color/transparent"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-    <EditText
-        android:id="@+id/Part4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/partstring"
-        android:background="@color/transparent"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
 
-    <EditText
-        android:id="@+id/Part5"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/partstring"
-        android:background="@color/transparent"/>
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 
     <View
         android:layout_width="match_parent"

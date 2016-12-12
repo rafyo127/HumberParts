@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         MenuItem register = menu.findItem(R.id.action_logout);
+        MenuItem search = menu.findItem(R.id.action_search);
+        search.setVisible(false);
         if(mFirebaseUser == null){
             register.setVisible(false);
         }else{
@@ -110,6 +112,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed() {
+        AlertDialog diaBox = AskOption();
+        diaBox.show();
+    }
+
+    private AlertDialog AskOption()
+    {
+        AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+                .setTitle("Exit")
+                .setMessage("Are you sure you want to exit?")
+
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        return myQuittingDialogBox;
+
     }
 
 }

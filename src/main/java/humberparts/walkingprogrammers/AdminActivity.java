@@ -78,6 +78,8 @@ public class AdminActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         MenuItem register = menu.findItem(R.id.action_logout);
+        MenuItem search = menu.findItem(R.id.action_search);
+        search.setVisible(false);
         if(mFirebaseUser == null){
             register.setVisible(false);
         }else{
